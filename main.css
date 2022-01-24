@@ -1,0 +1,29 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #bfc9ca;
+  margin: 0;
+}
+
+header {
+  background-color: #2471a3;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main section {
+  text-align: center;
+}
