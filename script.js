@@ -16,7 +16,11 @@ let habitActions = {
     currentCount.replaceWith(newCount);
   },
   missed: function (habit) {
-    alert(`MISSED: ${habit}`);
+    let currentCount = document.querySelector(`.${habit} > .habit-count `);
+    let newCount = document.createElement("p");
+    newCount.innerHTML = "0";
+    newCount.className = "habit-count";
+    currentCount.replaceWith(newCount);
   },
   delete: function (habit) {
     alert(`DELETE: ${habit}`);
