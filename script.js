@@ -23,7 +23,8 @@ let habitActions = {
     currentCount.replaceWith(newCount);
   },
   delete: function (habit) {
-    alert(`DELETE: ${habit}`);
+    let currentHabit = document.querySelector(`.${habit}`);
+    currentHabit.remove();
   },
 };
 
