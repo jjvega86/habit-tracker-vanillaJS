@@ -7,7 +7,13 @@ let listOfHabits = document.getElementById("habits-list");
 
 let habitActions = {
   done: function (habit) {
-    alert(`DONE: ${habit}`);
+    let currentCount = document.querySelector(`.${habit} > .habit-count `);
+    let convertedCount = parseInt(currentCount.textContent);
+    convertedCount++;
+    let newCount = document.createElement("p");
+    newCount.innerHTML = `${convertedCount}`;
+    newCount.className = "habit-count";
+    currentCount.replaceWith(newCount);
   },
   missed: function (habit) {
     alert(`MISSED: ${habit}`);
@@ -33,9 +39,6 @@ function habitReducer(event) {
 // Event Listeners
 let addButton = document.getElementById("add-habit");
 addButton.addEventListener("click", addHabit);
-
-/* let habitContainer = document.getElementById("habits-list");
-habitContainer.addEventListener("click", habitReducer); */
 
 // Functions
 function addHabit(event) {
