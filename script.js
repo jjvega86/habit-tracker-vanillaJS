@@ -1,9 +1,27 @@
-// Global Variables
-let habits = [];
-let habitCount = 0;
-let listOfHabits = document.getElementById("habits-list");
+// TODO: Persist habit storage (localStorage)
+// TODO: Styling (make it look awesome!)
+// TODO: Persist habit storage using Firebase
+// TODO: Modal component for CRUD
+// TODO: Add support for users
+// TODO: Off canvas sidebar (after add users)
+// TODO: Form validation
 
-// Menu Function Reducer
+let habitCount = 0;
+(() => {
+  // check if habit count is currently in local storage
+  // if not, create the key/value and set to 0
+  let storedHabitCount = localStorage.getItem("count");
+  console.log(storedHabitCount);
+  if (!storedHabitCount) {
+    localStorage.setItem("count", "0");
+  } else {
+    habitCount = parseInt(storedHabitCount);
+  }
+})();
+
+let listOfHabits = document.getElementById("habits-list");
+let addButton = document.getElementById("add-habit");
+addButton.addEventListener("click", addHabit);
 
 let habitActions = {
   done: function (habit) {
@@ -41,15 +59,25 @@ function habitReducer(event) {
   }
 }
 
-// Event Listeners
-let addButton = document.getElementById("add-habit");
-addButton.addEventListener("click", addHabit);
+// When a habit is added
+// I want to store the habit as an object in local storage
+// When habits are rendered to the screen
+// I want to grab them from local storage, and convert from JSON
 
-// Functions
+// use habit count stored in local storage to dynamically generate class for each
+
+function newAddHabit(event) {
+  event.preventDefault();
+  let habitText = document.getElementById("habit-text");
+  let habit = {
+    text: habitText.value,
+    streak: 0,
+  };
+}
+
 function addHabit(event) {
   event.preventDefault();
   let habit = document.getElementById("habit-text");
-  habits.push(habit.value);
   let newHabit = document.createElement("div");
   habitCount++;
   newHabit.className = `habit-${habitCount}`;
