@@ -31,13 +31,17 @@ function renderHabits(habitCount) {
 
 let habitActions = {
   done: function (habit) {
-    let currentCount = document.querySelector(`.${habit} > .habit-count `);
-    let convertedCount = parseInt(currentCount.textContent);
-    convertedCount++;
-    let newCount = document.createElement("p");
-    newCount.innerHTML = `${convertedCount}`;
-    newCount.className = "habit-count";
-    currentCount.replaceWith(newCount);
+    // get current habit, parse, and update streak value
+    let currentHabit = JSON.parse(localStorage.getItem(`${habit}`));
+    currentHabit.streak++;
+    localStorage.setItem(`${habit}`, JSON.stringify(currentHabit));
+
+    // create a new count element for the current habit and replace old
+    let selectedHabitCount = document.querySelector(`.${habit} > .habit-count`);
+    let newStreak = document.createElement("p");
+    newStreak.innerHTML = `${currentHabit.streak}`;
+    newStreak.className = "habit-count";
+    selectedHabitCount.replaceWith(newStreak);
   },
   missed: function (habit) {
     let currentCount = document.querySelector(`.${habit} > .habit-count `);
@@ -53,13 +57,13 @@ let habitActions = {
 };
 
 function habitReducer(event) {
-  let currentHabit = event.currentTarget.className;
+  let habitName = event.currentTarget.className;
   if (event.target.className === "habit-done") {
-    habitActions.done(currentHabit);
+    habitActions.done(habitName);
   } else if (event.target.className === "habit-missed") {
-    habitActions.missed(currentHabit);
+    habitActions.missed(habitName);
   } else if (event.target.className === "habit-delete") {
-    habitActions.delete(currentHabit);
+    habitActions.delete(habitName);
   } else {
     alert("Default!");
   }
