@@ -44,6 +44,12 @@ let habitActions = {
     selectedHabitCount.replaceWith(newStreak);
   },
   missed: function (habit) {
+    // get current habit, parse, and zero out streak value
+    let currentHabit = JSON.parse(localStorage.getItem(`${habit}`));
+    currentHabit.streak = 0;
+    localStorage.setItem(`${habit}`, JSON.stringify(currentHabit));
+
+    // replace old count element with 0 content
     let currentCount = document.querySelector(`.${habit} > .habit-count `);
     let newCount = document.createElement("p");
     newCount.innerHTML = "0";
@@ -51,6 +57,10 @@ let habitActions = {
     currentCount.replaceWith(newCount);
   },
   delete: function (habit) {
+    // remove current habit from localStorage and render habits
+    localStorage.removeItem(`${habit}`);
+    habitCount--;
+    localStorage.setItem("count", habitCount);
     let currentHabit = document.querySelector(`.${habit}`);
     currentHabit.remove();
   },
@@ -71,14 +81,15 @@ function habitReducer(event) {
 
 function addHabit(event) {
   event.preventDefault();
-  let habitText = document.getElementById("habit-text");
+  let habitInput = document.getElementById("habit-text");
   let habit = {
-    text: habitText.value,
+    text: habitInput.value,
     streak: 0,
   };
   storeHabitInLocalStorage(habit);
+  createHabitElement(habitInput.value, habitCount, 0);
   updateHabitCount();
-  createHabitElement(habitText.value, habitCount, 0);
+  habitInput.value = "";
 }
 
 function createHabitElement(habitText, currentCount, streak) {
@@ -92,7 +103,6 @@ function createHabitElement(habitText, currentCount, streak) {
   ><button class="habit-delete">DELETE</button>`;
   newHabit.addEventListener("click", habitReducer);
   listOfHabits.append(newHabit);
-  habitText.value = "";
 }
 
 function storeHabitInLocalStorage(habit) {
