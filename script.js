@@ -66,28 +66,39 @@ function habitReducer(event) {
 
 // use habit count stored in local storage to dynamically generate class for each
 
-function newAddHabit(event) {
+function addHabit(event) {
   event.preventDefault();
   let habitText = document.getElementById("habit-text");
   let habit = {
     text: habitText.value,
     streak: 0,
   };
+  storeHabitInLocalStorage(habit);
+  updateHabitCount();
+  createHabitElement(habitText);
 }
 
-function addHabit(event) {
-  event.preventDefault();
-  let habit = document.getElementById("habit-text");
+function createHabitElement(habitText) {
   let newHabit = document.createElement("div");
-  habitCount++;
   newHabit.className = `habit-${habitCount}`;
   newHabit.innerHTML = `
-  <p class="habit-text">${habit.value}</p>
+  <p class="habit-text">${habitText.value}</p>
   <p class="habit-count">0</p>
   <button class="habit-done">DONE</button
   ><button class="habit-missed">MISSED</button
   ><button class="habit-delete">DELETE</button>`;
   newHabit.addEventListener("click", habitReducer);
   listOfHabits.append(newHabit);
-  habit.value = "";
+  habitText.value = "";
+}
+
+function storeHabitInLocalStorage(habit) {
+  localStorage.setItem(`habit-${habitCount}`, JSON.stringify(habit));
+}
+
+function updateHabitCount() {
+  habitCount++;
+  let storedCount = parseInt(localStorage.getItem("count"));
+  storedCount = habitCount;
+  localStorage.setItem("count", storedCount);
 }
