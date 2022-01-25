@@ -5,23 +5,29 @@
 // TODO: Add support for users
 // TODO: Off canvas sidebar (after add users)
 // TODO: Form validation
+// TODO: Add regions and comments
 
 let habitCount = 0;
+let listOfHabits = document.getElementById("habits-list");
+let addButton = document.getElementById("add-habit");
+addButton.addEventListener("click", addHabit);
+
 (() => {
-  // check if habit count is currently in local storage
-  // if not, create the key/value and set to 0
   let storedHabitCount = localStorage.getItem("count");
-  console.log(storedHabitCount);
   if (!storedHabitCount) {
     localStorage.setItem("count", "0");
   } else {
     habitCount = parseInt(storedHabitCount);
+    renderHabits(habitCount);
   }
 })();
 
-let listOfHabits = document.getElementById("habits-list");
-let addButton = document.getElementById("add-habit");
-addButton.addEventListener("click", addHabit);
+function renderHabits(habitCount) {
+  for (let index = 0; index < habitCount; index++) {
+    let habit = JSON.parse(localStorage.getItem(`habit-${index}`));
+    createHabitElement(habit.text, index, habit.streak);
+  }
+}
 
 let habitActions = {
   done: function (habit) {
@@ -59,13 +65,6 @@ function habitReducer(event) {
   }
 }
 
-// When a habit is added
-// I want to store the habit as an object in local storage
-// When habits are rendered to the screen
-// I want to grab them from local storage, and convert from JSON
-
-// use habit count stored in local storage to dynamically generate class for each
-
 function addHabit(event) {
   event.preventDefault();
   let habitText = document.getElementById("habit-text");
@@ -75,15 +74,15 @@ function addHabit(event) {
   };
   storeHabitInLocalStorage(habit);
   updateHabitCount();
-  createHabitElement(habitText);
+  createHabitElement(habitText.value, habitCount, 0);
 }
 
-function createHabitElement(habitText) {
+function createHabitElement(habitText, currentCount, streak) {
   let newHabit = document.createElement("div");
-  newHabit.className = `habit-${habitCount}`;
+  newHabit.className = `habit-${currentCount}`;
   newHabit.innerHTML = `
-  <p class="habit-text">${habitText.value}</p>
-  <p class="habit-count">0</p>
+  <p class="habit-text">${habitText}</p>
+  <p class="habit-count">${streak}</p>
   <button class="habit-done">DONE</button
   ><button class="habit-missed">MISSED</button
   ><button class="habit-delete">DELETE</button>`;
