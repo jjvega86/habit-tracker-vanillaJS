@@ -5,6 +5,7 @@
 // TODO: Off canvas sidebar (after add users)
 // TODO: Form validation
 // TODO: Add regions and comments
+// TODO: DEPLOY
 
 let habitCount = 0;
 let listOfHabits = document.getElementById("habits-list");
