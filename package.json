@@ -1,0 +1,23 @@
+{
+  "name": "habit-tracker-vanillajs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "key.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjvega86/habit-tracker-vanillaJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjvega86/habit-tracker-vanillaJS/issues"
+  },
+  "homepage": "https://github.com/jjvega86/habit-tracker-vanillaJS#readme",
+  "dependencies": {
+    "firebase": "^9.6.4"
+  }
+}
