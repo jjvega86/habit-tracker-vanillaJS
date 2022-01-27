@@ -7,6 +7,9 @@
 // TODO: Add regions and comments
 // TODO: DEPLOY
 
+//import { app } from "./utils/firebase";
+import { testValue } from "./utils/firebase";
+console.log("Test value", testValue);
 let habitCount = 0;
 let listOfHabits = document.getElementById("habits-list");
 let addButton = document.getElementById("add-habit");
