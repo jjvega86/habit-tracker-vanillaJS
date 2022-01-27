@@ -1,5 +1,6 @@
-// TODO: Persist habit storage using Firebase
+// TODO: Persist habit storage (localStorage)
 // TODO: Styling (make it look awesome!)
+// TODO: Persist habit storage using Firebase
 // TODO: Modal component for CRUD
 // TODO: Add support for users
 // TODO: Off canvas sidebar (after add users)
@@ -34,10 +35,12 @@ function renderHabits(habitCount) {
 
 let habitActions = {
   done: function (habit) {
+    // get current habit, parse, and update streak value
     let currentHabit = JSON.parse(localStorage.getItem(`${habit}`));
     currentHabit.streak++;
     localStorage.setItem(`${habit}`, JSON.stringify(currentHabit));
 
+    // create a new count element for the current habit and replace old
     let selectedHabitCount = document.querySelector(`.${habit} > .habit-count`);
     let newStreak = document.createElement("p");
     newStreak.innerHTML = `${currentHabit.streak}`;
@@ -45,10 +48,12 @@ let habitActions = {
     selectedHabitCount.replaceWith(newStreak);
   },
   missed: function (habit) {
+    // get current habit, parse, and zero out streak value
     let currentHabit = JSON.parse(localStorage.getItem(`${habit}`));
     currentHabit.streak = 0;
     localStorage.setItem(`${habit}`, JSON.stringify(currentHabit));
 
+    // replace old count element with 0 content
     let currentCount = document.querySelector(`.${habit} > .habit-count `);
     let newCount = document.createElement("p");
     newCount.innerHTML = "0";
@@ -56,9 +61,10 @@ let habitActions = {
     currentCount.replaceWith(newCount);
   },
   delete: function (habit) {
+    // remove current habit from localStorage and render habits
     localStorage.removeItem(`${habit}`);
-    decreaseHabitCount();
-
+    habitCount--;
+    localStorage.setItem("count", habitCount);
     let currentHabit = document.querySelector(`.${habit}`);
     currentHabit.remove();
   },
@@ -86,7 +92,7 @@ function addHabit(event) {
   };
   storeHabitInLocalStorage(habit);
   createHabitElement(habitInput.value, habitCount, 0);
-  increaseHabitCount();
+  updateHabitCount();
   habitInput.value = "";
 }
 
@@ -107,12 +113,9 @@ function storeHabitInLocalStorage(habit) {
   localStorage.setItem(`habit-${habitCount}`, JSON.stringify(habit));
 }
 
-function increaseHabitCount() {
+function updateHabitCount() {
   habitCount++;
-  localStorage.setItem("count", habitCount);
-}
-
-function decreaseHabitCount() {
-  habitCount--;
-  localStorage.setItem("count", habitCount);
+  let storedCount = parseInt(localStorage.getItem("count"));
+  storedCount = habitCount;
+  localStorage.setItem("count", storedCount);
 }
