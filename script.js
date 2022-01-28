@@ -29,7 +29,8 @@ let habitActions = {
     let selectedHabitCount = document.querySelector(`.${habit} .habit-count`);
     let newStreak = document.createElement("p");
     newStreak.innerHTML = `${currentHabit.streak}`;
-    newStreak.className = "habit-count";
+    newStreak.className =
+      currentHabit.streak > 5 ? "habit-count habit-streak" : "habit-count";
     selectedHabitCount.replaceWith(newStreak);
   },
   missed: function (habit) {
@@ -40,7 +41,7 @@ let habitActions = {
     let currentCount = document.querySelector(`.${habit} .habit-count `);
     let newCount = document.createElement("p");
     newCount.innerHTML = "0";
-    newCount.className = "habit-count";
+    newCount.className = "habit-count habit-zero";
     currentCount.replaceWith(newCount);
   },
   delete: function (habit) {
@@ -84,7 +85,7 @@ function createHabitElement(habitText, currentCount, streak) {
   newHabit.innerHTML = `
   <div class="habit-card">
   <p class="habit-text">${habitText}</p>
-  <p class="habit-count">${streak}</p>
+  <p class="habit-count habit-zero">${streak}</p>
   <button class="habit-done">DONE</button
   ><button class="habit-missed">MISSED</button
   ><button class="habit-delete">DELETE</button></div>`;

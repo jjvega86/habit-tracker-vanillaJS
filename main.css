@@ -75,6 +75,18 @@ input[type="text"] {
   transition: 0.3s;
 }
 
+.habit-card .habit-count {
+  font-size: 1.5rem;
+}
+
+.habit-zero {
+  color: rgb(223, 76, 76);
+}
+
+.habit-streak {
+  color: rgb(81, 222, 81);
+}
+
 .habit-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
