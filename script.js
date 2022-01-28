@@ -1,16 +1,3 @@
-// TODO: Persist habit storage (localStorage)
-// TODO: Styling (make it look awesome!)
-// TODO: Persist habit storage using Firebase
-// TODO: Modal component for CRUD
-// TODO: Add support for users
-// TODO: Off canvas sidebar (after add users)
-// TODO: Form validation
-// TODO: Add regions and comments
-// TODO: DEPLOY
-
-//import { app } from "./utils/firebase";
-import { testValue } from "./utils/firebase";
-console.log("Test value", testValue);
 let habitCount = 0;
 let listOfHabits = document.getElementById("habits-list");
 let addButton = document.getElementById("add-habit");
