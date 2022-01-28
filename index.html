@@ -5,8 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habit Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="main.css" />
-    <script type="module" src="script.js"></script>
   </head>
   <body>
     <header>
@@ -16,7 +21,13 @@
       <section>
         <p>Please enter your habit here:</p>
         <form>
-          <input type="text" name="habit-text" id="habit-text" value="" />
+          <input
+            type="text"
+            name="habit-text"
+            id="habit-text"
+            value=""
+            placeholder="Your habit here..."
+          />
           <button id="add-habit" type="submit">Add Habit</button>
         </form>
       </section>
@@ -24,5 +35,6 @@
         <div id="habits-list"></div>
       </section>
     </main>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

@@ -5,12 +5,14 @@
 }
 
 body {
-  background-color: #bfc9ca;
-  margin: 0;
+  background-color: #565656;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  margin: 0 auto;
 }
 
 header {
-  background-color: #2471a3;
+  background-color: hsl(203, 63%, 39%);
   color: white;
   display: flex;
   justify-content: center;
@@ -21,9 +23,68 @@ main {
   align-items: center;
   display: flex;
   flex-direction: column;
+  gap: 10%;
   justify-content: center;
 }
 
 main section {
   text-align: center;
+  margin-top: 20px;
+  padding: 1rem;
+  width: 80%;
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: large;
+  margin-top: 10px;
+  padding: 0.5rem;
+  transition: 0.5s;
+}
+
+button:hover {
+  background-color: white;
+  color: hsl(203, 63%, 39%);
+  cursor: pointer;
+  padding: 1rem;
+}
+
+input[type="text"] {
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  height: 50px;
+  width: 80%;
+}
+
+.habit-card {
+  background-color: hsl(0, 0%, 40%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  align-items: center;
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: space-between;
+  gap: 10%;
+  margin: 2rem;
+  min-width: 600px;
+  padding: 2rem;
+  transition: 0.3s;
+}
+
+.habit-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 870px) {
+  .habit-card {
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    min-width: 200px;
+  }
 }
